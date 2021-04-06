@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <router-link to="/main">首页</router-link>
-    <router-link to="/login">登录</router-link>
+    <router-link to="/main"></router-link>
+    <router-link to="/login"></router-link>
     <router-view></router-view>
   </div>
 </template>

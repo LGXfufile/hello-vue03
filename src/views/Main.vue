@@ -16,6 +16,7 @@
               </el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+
           <el-submenu index="2">
             <template slot="title"><i class="el-icon-caret-right"></i>内容管理</template>
             <el-menu-item-group>
@@ -51,8 +52,8 @@ export default {
 </script>
 <style scoped lang="scss">
 .el-header {
-  background-color: #B3C0D1;
-  color: #333;
+  background-color: #abc2e2;
+  color: #e70b0b;
   line-height: 60px;
 }
 .el-aside {

@@ -4,11 +4,13 @@ import Main from "../views/Main";
 import Login from "../views/Login";
 import List from "../views/user/List";
 import profile from "../views/user/profile";
+import NotFound from "../views/NotFound";
 
 
 Vue.use(router)
 
 export default new router({
+  mode:'history',
   routes:[
     {
       path:'/main',
@@ -27,6 +29,10 @@ export default new router({
     {
       path: '/login',
       component: Login
+    },
+    {
+      path: '*',
+      component: NotFound
     }
   ]
 })
