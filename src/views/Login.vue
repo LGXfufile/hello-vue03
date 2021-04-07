@@ -1,79 +1,86 @@
 <template>
-  <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-    <el-form-item label="密码" prop="pass">
-      <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
-    </el-form-item>
-    <el-form-item label="确认密码" prop="checkPass">
-      <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-    </el-form-item>
+  <div>
+    <el-form ref="loginForm" :model="form" :rules="rules" label-width="80px" class="login-box">
+      <h3 class="login-title">欢迎登录</h3>
+      <el-form-item label="账号" prop="username">
+        <el-input type="text" placeholder="请输入账号" v-model="form.username"/>
+      </el-form-item>
+      <el-form-item label="密码" prop="password">
+        <el-input type="password" placeholder="请输入密码" v-model="form.password"/>
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" v-on:click="onSubmit('loginForm')">登录</el-button>
+      </el-form-item>
+    </el-form>
 
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
-      <el-button @click="resetForm('ruleForm')">重置</el-button>
-    </el-form-item>
-  </el-form>
-
+    <el-dialog
+      title="温馨提示"
+      :visible.sync="dialogVisible"
+      width="30%"
+      :before-close="handleClose">
+      <span>请输入账号和密码</span>
+      <span slot="footer" class="dialog-footer">
+        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+      </span>
+    </el-dialog>
+  </div>
 </template>
 
 <script>
 export default {
   name: "Login",
   data() {
-
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请输入密码'));
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass');
-        }
-        callback();
-      }
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('请再次输入密码'));
-      } else if (value !== this.ruleForm.pass) {
-        callback(new Error('两次输入密码不一致!'));
-      } else {
-        callback();
-      }
-    };
     return {
-      ruleForm: {
-        pass: '',
-        checkPass: '',
-        age: ''
+      form: {
+        username: '',
+        password: ''
       },
+
+      // 表单验证，需要在 el-form-item 元素中增加 prop 属性
       rules: {
-        pass: [
-          { validator: validatePass, trigger: 'blur' }
+        username: [
+          {required: true, message: '账号不可为空', trigger: 'blur'}
         ],
-        checkPass: [
-          { validator: validatePass2, trigger: 'blur' }
+        password: [
+          {required: true, message: '密码不可为空', trigger: 'blur'}
         ]
-      }
-    };
+      },
+      // 对话框显示和隐藏
+      dialogVisible: false
+    }
   },
   methods: {
-    submitForm(formName) {
+    onSubmit(formName) {
+      // 为表单绑定验证功能
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          // alert('submit!');
-          this.$router.push('/main')//只要不为空，push到main
+          // 使用 vue-router 路由到指定页面，该方式称之为编程式导航
+        this.$router.push("/main");
         } else {
-          console.log('error submit!!');
+          this.dialogVisible = true;
           return false;
         }
       });
-    },
-    resetForm(formName) {
-      this.$refs[formName].resetFields();
     }
   }
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+.login-box {
+  border: 1px solid #DCDFE6;
+  width: 350px;
+  margin: 180px auto;
+  padding: 35px 35px 15px 35px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  box-shadow: 0 0 25px #909399;
+}
 
+.login-title {
+  text-align: center;
+  margin: 0 auto 40px auto;
+  color: #303133;
+}
 </style>

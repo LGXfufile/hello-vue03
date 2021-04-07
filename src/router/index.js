@@ -4,8 +4,6 @@ import Main from "../views/Main";
 import Login from "../views/Login";
 import List from "../views/user/List";
 import profile from "../views/user/profile";
-import NotFound from "../views/NotFound";
-
 
 Vue.use(router)
 
@@ -17,7 +15,7 @@ export default new router({
       component:Main,
       children:[
         {
-          path:'/user/profile',
+          path:'/user/profile/:id',//前端传了id,这里用：绑定id
           component:profile
         },
         {
@@ -29,10 +27,6 @@ export default new router({
     {
       path: '/login',
       component: Login
-    },
-    {
-      path: '*',
-      component: NotFound
     }
   ]
 })

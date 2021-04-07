@@ -3,12 +3,16 @@
     <el-container>
       <el-aside width="200px">
         <el-menu :default-openeds="['1']">
+
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-caret-right"></i>用户管理</template>
             <el-menu-item-group>
               <el-menu-item index="1-1">
                 <!--插入的地方-->
-                <router-link to="/user/profile">个人信息</router-link>
+<!--                to也可以传递对象；-->
+
+<!--                <router-link to="/user/profile">个人信息</router-link>-->
+                <router-link to="{name: '/user/profile',params:{id: 1 }}">个人信息</router-link>
               </el-menu-item>
               <el-menu-item index="1-2">
                 <!--插入的地方-->
@@ -24,9 +28,15 @@
               <el-menu-item index="2-2">内容列表</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
+          <el-submenu index="3">
+            <template slot="title"><i class="el-icon-caret-right"></i>自我充电</template>
+            <el-menu-item-group>
+              <el-menu-item index="3-1">用户设置</el-menu-item>
+              <el-menu-item index="3-2">内容设置</el-menu-item>
+            </el-menu-item-group>
+          </el-submenu>
         </el-menu>
       </el-aside>
-
       <el-container>
         <el-header style="text-align: right; font-size: 12px">
           <el-dropdown>
